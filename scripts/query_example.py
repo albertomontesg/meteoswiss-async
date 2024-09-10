@@ -15,21 +15,19 @@ async def main():
         resp = await client.get_weather(postal_code="8152")
         term.print(resp)
 
-        resp = await client.get_current_weather(station_code="KLO")
-        term.print(resp)
+        # resp = await client.get_current_weather(station_code="KLO")
+        # term.print(resp)
 
-        resp = await client.get_webcam_previews()
-        term.print(resp.stations[:2])
-        # resp = await client.get_station_information(station_code="KLO")
-        # print(resp)
+        # resp = await client.get_webcam_previews()
+        # term.print(resp.stations[:2])
 
         # resp = await client.get_full_overview(
         #     postal_code=["8152", "8001"], station_code=["KLO"]
         # )
-        # print(resp)
+        # term.print(resp)
 
         # stations = await client.get_stations()
-        # print(stations)
+        # term.print(stations)
 
 
 if __name__ == "__main__":

@@ -26,6 +26,9 @@
         "--settings-path=pyproject.toml"
     ],
     "cSpell.words": [
-        "aiohttp"
+        "aiohttp",
+        "longwave",
+        "meteoswiss",
+        "wigos"
     ]
 }

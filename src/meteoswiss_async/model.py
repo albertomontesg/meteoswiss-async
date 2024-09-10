@@ -224,7 +224,7 @@ class WarningDetail(WarningOverview):
     text: str
     html_text: str
     valid_from: TimestampMs
-    valid_to: TimestampMs
+    valid_to: TimestampMs | None = None
     ordering: str
     outlook: bool
 
@@ -374,6 +374,24 @@ class StationType(enum.StrEnum):
     PRECIPITATION_STATION = "Precipitation station"
 
 
+class StationMeasurement(enum.StrEnum):
+    CLOUDS = "Clouds"
+    DEW_POINT = "Dew point"
+    FOEHN_INDEX = "Foehn index"
+    GLOBAL_RADIATION = "Global radiation"
+    HUMIDITY = "Humidity"
+    LONGWAVE_RADIATION = "Longwave radiation"
+    PRECIPITATION = "Precipitation"
+    PRESSURE = "Pressure"
+    SNOW = "Snow"
+    SOIL_TEMPERATURE = "Soil temperature"
+    SUNSHINE = "Sunshine"
+    TEMPERATURE = "Temperature"
+    TEMPERATURE_5CM = "Temperature 5cm"
+    VISIBILITY = "Visibility"
+    WIND = "Wind"
+
+
 class Station(Model):
     name: str = dataclasses.field(metadata=config(field_name="Station"))
     code: str = dataclasses.field(metadata=config(field_name="Abbr."))
@@ -403,11 +421,11 @@ class Station(Model):
     longitude: float = dataclasses.field(
         metadata=config(field_name="Longitude")
     )
-    exposition: str = dataclasses.field(
+    exposition: str | None = dataclasses.field(
         metadata=config(field_name="Exposition")
     )
     canton: str = dataclasses.field(metadata=config(field_name="Canton"))
-    measurements: list[str] = dataclasses.field(
+    measurements: list[StationMeasurement] = dataclasses.field(
         metadata=config(field_name="Measurements")
     )
     link: str = dataclasses.field(metadata=config(field_name="Link"))
