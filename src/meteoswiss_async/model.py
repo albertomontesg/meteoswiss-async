@@ -76,6 +76,7 @@ class Icon(enum.Enum):
     OVERCAST_SCATTERED_SHOWERS = 106
     OVERCAST_SCATTERED_RAIN = 107
     OVERCAST_SNOW_SHOWERS = 108
+    OVERCAST_SOME_SHOWERS = 109
     OVERCAST_SOME_SNOW_SHOWERS = 11
     OVERCAST_SOME_RAIN_AND_SNOW_SHOWERS = 110
     OVERCAST_SOME_SNOW_SHOWERS_2 = 111
@@ -200,8 +201,8 @@ class Condition(enum.StrEnum):
 
 class CurrentWeather(Model):
     time: TimestampMs
-    icon: Icon
-    icon_v2: Icon
+    icon: Icon | None = None
+    icon_v2: Icon | None = None
     temperature: int
 
     @property
@@ -361,22 +362,24 @@ class Weather(Forecast):
 class StationInformation(Model):
     station_id: str
     time: TimestampMs
-    temperature: float
-    wind_speed: float
-    wind_direction: int
-    wind_gust: float
-    precipitation: float
-    humidity: int
-    pressure_standard: float
-    pressure_station: float
-    pressure_sea: float
-    sunshine: int
-    dew_point: float
-    snow_new: int
-    snow_total: int
+    temperature: float | None = None
+    wind_speed: float | None = None
+    wind_direction: int | None = None
+    wind_gust: float | None = None
+    precipitation: float | None = None
+    humidity: int | None = None
+    pressure_standard: float | None = None
+    pressure_station: float | None = None
+    pressure_sea: float | None = None
+    sunshine: int | None = None
+    dew_point: float | None = None
+    snow_new: int | None = None
+    snow_total: int | None = None
 
     @property
-    def wind_cardinal_direction(self) -> CardinalDirection:
+    def wind_cardinal_direction(self) -> CardinalDirection | None:
+        if self.wind_direction is None:
+            return None
         return CardinalDirection.from_degrees(self.wind_direction)
 
 
