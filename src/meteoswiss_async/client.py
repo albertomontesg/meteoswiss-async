@@ -88,12 +88,12 @@ class MeteoSwissClient:
 
     async def get_current_weather(
         self, *, station_code: str
-    ) -> model.StationInformation:
+    ) -> model.CurrentWeather:
         async with self._session.get(
             _METEOSWISS_API_URL + "currentweather",
             params={"ws": station_code},
         ) as response:
-            return model.StationInformation.from_dict(await response.json())
+            return model.CurrentWeather.from_dict(await response.json())
 
     async def get_full_overview(
         self, *, postal_code: list[str], station_code: list[str]
